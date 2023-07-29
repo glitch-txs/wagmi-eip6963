@@ -8,14 +8,15 @@ export function initializeEIP6963(){
   const config = getConfig()
 
   store.subscribe((PDs)=>{
+    const index = PDs.length - 1
     //@ts-ignore
-    if(config.store.getState().connectors.some((c: Connector) => c.id === PDs[PDs.length - 1].info.rdns)) return
+    if(config.store.getState().connectors.some((c: Connector) => c.id === PDs[index].info.rdns)) return
 
     const newConnector = new MIPDConnector({
       options: {
-        id: PDs[PDs.length - 1].info.rdns,
-        name: PDs[PDs.length - 1].info.name,
-        getProvider: () => PDs[PDs.length - 1].provider,
+        id: PDs[index].info.rdns,
+        name: PDs[index].info.name,
+        getProvider: () => PDs[index].provider,
       },
     })
 
