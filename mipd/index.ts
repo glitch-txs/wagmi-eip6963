@@ -7,24 +7,24 @@ export function initializeEIP6963(){
   const store = createStore()
   const config = getConfig()
 
-  store.subscribe((providerDetails)=>{
-    const newConnectors = providerDetails.map((pd)=>{
-      return new MIPDConnector({
-        options: {
-          id: pd.info.rdns,
-          name: pd.info.name,
-          getProvider: () => pd.provider,
-        },
-      })
-    })
+  store.subscribe((PDs)=>{
     //@ts-ignore
-    config.store?.setState((state)=>({ 
-      connectors: [
-        ...newConnectors.filter(newC => !state.connectors.some((c: Connector) => c.id === newC.id)),
-        ...state.connectors
-      ]
-      }))
-    }, {
+    if(config.store.getState().connectors.some((c: Connector) => c.id === PDs[PDs.length - 1].info.rdns)) return
+
+    const newConnector = new MIPDConnector({
+      options: {
+        id: PDs[PDs.length - 1].info.rdns,
+        name: PDs[PDs.length - 1].info.name,
+        getProvider: () => PDs[PDs.length - 1].provider,
+      },
+    })
+
+    //@ts-ignore
+    config.store?.setState((state)=>({connectors: [ newConnector, ...state.connectors]}))
+    },
+    {
       emitImmediately: true
-  })
+    }
+  )
+  
 }
