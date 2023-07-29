@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import Connect from '../../components/Connect'
-import { Hydrate } from '../../utils/hydration'
+import Connect from '../components/Connect'
+import { Hydrate } from '../utils/hydration'
 
 export default function Home() {
   return (

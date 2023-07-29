@@ -6,7 +6,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { WagmiConfig } from 'wagmi'
-import { initializeEIP6963 } from '../../mipd'
+import { initializeEIP6963 } from '../mipd'
 
 const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
  
