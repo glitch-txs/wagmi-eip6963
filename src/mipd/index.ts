@@ -8,6 +8,7 @@ export function initializeEIP6963(){
   const config = getConfig()
 
   store.subscribe((PDs)=>{
+    if(PDs.length === 0) return
     const index = PDs.length - 1
     //@ts-ignore
     if(config.store.getState().connectors.some((c: Connector) => c.id === PDs[index].info.rdns)) return
@@ -27,5 +28,4 @@ export function initializeEIP6963(){
       emitImmediately: true
     }
   )
-  
 }
